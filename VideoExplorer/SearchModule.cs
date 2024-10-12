@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideoExplorer
+﻿namespace VideoExplorer
 {
     public class SearchModule : IModule
     {
@@ -18,7 +12,7 @@ namespace VideoExplorer
         public void OnInitialized(IContainerProvider containerProvider)
         {
             // Register views with regions here (e.g., inject a view into a region)
-            _regionManager.RegisterViewWithRegion("SearchRegion", typeof(SearchBarView));
+            _regionManager.RequestNavigate("SearchRegion","SearchBarView");
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

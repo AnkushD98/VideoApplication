@@ -20,6 +20,7 @@
         <Button Content="Select" HorizontalAlignment="Left" Margin="622,167,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <TextBox x:Name="selectedFileTextBox" HorizontalAlignment="Left" Margin="165,233,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label Content="Selected file" HorizontalAlignment="Left" Margin="42,229,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" Click="btnBack_Click"/>
 
     </Grid>
 </UserControl>

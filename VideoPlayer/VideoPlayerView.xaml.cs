@@ -11,6 +11,7 @@ namespace VideoPlayer
     public partial class VideoPlayerView : UserControl, INavigationAware
     {
         private DispatcherTimer _timer;
+        private IRegionNavigationService _regionNavigationService;
 
         public VideoPlayerView()
         {
@@ -60,6 +61,7 @@ namespace VideoPlayer
                 videoMediaElement.Source = video.Path;
             }
             videoMediaElement.Play();
+            _regionNavigationService = navigationContext.NavigationService;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -75,6 +77,19 @@ namespace VideoPlayer
         {
             sliderPlay.Maximum = videoMediaElement.NaturalDuration.TimeSpan.TotalSeconds;
             _timer.Start();
+        }
+
+        private bool CanGoBack(object commandArg)
+        {
+            return _regionNavigationService.Journal.CanGoBack;
+        }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            if (_regionNavigationService.Journal.CanGoBack)
+            {
+                _regionNavigationService.Journal.GoBack();
+            }
         }
     }
 }

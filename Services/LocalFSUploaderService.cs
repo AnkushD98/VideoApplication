@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Database;
+using Util;
 
 namespace Services
 {
@@ -20,7 +16,7 @@ namespace Services
 
         private Uri GenerateUri()
         {
-            return new Uri("file:///H:/UploadedVideos");
+            return new Uri(Paths.UploadedVideosPath);
         }
     }
 }

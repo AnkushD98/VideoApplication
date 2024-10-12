@@ -8,11 +8,27 @@ namespace VideoExplorer.Upload
     /// <summary>
     /// Interaction logic for UploadView.xaml
     /// </summary>
-    public partial class UploadView : UserControl
+    public partial class UploadView : UserControl,INavigationAware
     {
+        private IRegionNavigationService _regionNavigationService;
+
         public UploadView()
         {
             InitializeComponent();
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            _regionNavigationService = navigationContext.NavigationService;
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -42,6 +58,19 @@ namespace VideoExplorer.Upload
                     uploadedVideoLinkTextBlock.Text = uploader.UploadVideo(stream, fileInfo.Name).ToString();
                 }
             }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (_regionNavigationService.Journal.CanGoBack)
+            {
+                _regionNavigationService.Journal.GoBack();
+            }
+        }
+
+        private bool CanGoBack(object commandArg)
+        {
+            return _regionNavigationService.Journal.CanGoBack;
         }
     }
 }

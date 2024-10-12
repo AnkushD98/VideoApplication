@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideoExplorer.Upload
+﻿namespace VideoExplorer.Upload
 {
     public class UploadModule : IModule
     {
@@ -17,6 +11,7 @@ namespace VideoExplorer.Upload
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
+            _regionManager.RequestNavigate("UploadRegion", "UploadView");
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

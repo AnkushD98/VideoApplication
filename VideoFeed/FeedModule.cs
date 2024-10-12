@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VideoFeed
+﻿namespace VideoFeed
 {
     public class FeedModule : IModule
     {
@@ -17,8 +11,7 @@ namespace VideoFeed
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            // Register views with regions here (e.g., inject a view into a region)
-            _regionManager.RegisterViewWithRegion("FeedRegion", typeof(FeedView));
+            _regionManager.RequestNavigate("FeedRegion", "FeedView");
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

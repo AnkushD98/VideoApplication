@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Database;
+﻿using Database;
+using Util;
 using Util.CommonModel;
 
 namespace Services
@@ -13,7 +9,7 @@ namespace Services
         public List<Video> GetVideosFromSource(Uri uri)
         {
             LocalFSRepository localFsRepository = new LocalFSRepository();
-            return localFsRepository.GetVideosFromSource(new Uri($"file:///C:/Users/{Environment.UserName}/Videos/Captures"));
+            return localFsRepository.GetVideosFromSource(new Uri(Paths.UploadedVideosPath));
         }
     }
 }
