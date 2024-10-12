@@ -1,0 +1,24 @@
+﻿<Window x:Class="VideoApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VideoApplication"
+        xmlns:prism="http://prismlibrary.com/"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="796" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ContentControl x:Name="searchBarControl" prism:RegionManager.RegionName="SearchRegion" HorizontalAlignment="Stretch" Margin="8,8,8,8" VerticalAlignment="Top" VerticalContentAlignment="Stretch" Grid.Row="0"/>
+        <ContentControl x:Name="VideoViewerControl" prism:RegionManager.RegionName="FeedRegion" Margin="8,8,8,8" Width="Auto" Height="Auto" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Grid.Row="1"/>
+        <ContentControl x:Name="FooterControl" prism:RegionManager.RegionName="FooterRegion" Margin="8,8,8,8" VerticalContentAlignment="Stretch" Grid.Row="2"/>
+
+    </Grid>
+</Window>

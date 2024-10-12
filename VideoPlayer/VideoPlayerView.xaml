@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="VideoPlayer.VideoPlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:VideoPlayer"
+             mc:Ignorable="d" d:DesignWidth="800"
+             Width="Auto"
+             Height="Auto">
+    <StackPanel x:Name="pnlStack">
+        <DockPanel x:Name="pnlDock" HorizontalAlignment="Stretch" Height="Auto">
+            <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="8,10,0,8" VerticalAlignment="Top" Width="121" Grid.Column="1" Click="btnClose_Click" DockPanel.Dock="Right"/>
+        </DockPanel>
+        <MediaElement x:Name="videoMediaElement" Height="500" Margin="8,8,8,8" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" MediaOpened="OnMediaElementOpened"/>
+        <WrapPanel x:Name="pnlWrap" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
+            <Button x:Name="btnPlay" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="btnPlay_Click" Height="48" Margin="8,8,8,8"/>
+            <Button x:Name="btnPause" Content="Pause"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Click="btnPause_Click" Height="48" Margin="8,8,8,8"/>
+            <Button x:Name="btnStop" Content="Stop"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Click="btnStop_Click" Margin="8,8,8,8" Height="48"/>
+            <Slider x:Name="sliderPlay" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="48" ValueChanged="sliderPlay_ValueChanged" Padding="8,8,8,8" Margin="0,0,0,0" ToolTip="Seek"/>
+            <Slider x:Name="sliderVol" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Height="48" ValueChanged="sliderVol_ValueChanged" Padding="8,8,8,8" ToolTip="Volume"/>
+        </WrapPanel>
+    </StackPanel>
+</UserControl>
