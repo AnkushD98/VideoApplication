@@ -1,7 +1,6 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using VideoExplorer;
+using VideoExplorer.Upload;
 using VideoFeed;
 using VideoPlayer;
 
@@ -33,6 +32,7 @@ namespace VideoApplication
             // Register the modules with the catalog
             moduleCatalog.AddModule<FeedModule>();
             moduleCatalog.AddModule<SearchModule>();
+            moduleCatalog.AddModule<UploadModule>();
         }
     }
 

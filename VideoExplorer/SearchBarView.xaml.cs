@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace VideoExplorer
 {
@@ -20,9 +8,17 @@ namespace VideoExplorer
     /// </summary>
     public partial class SearchBarView : UserControl
     {
-        public SearchBarView()
+        private IRegionManager _regionManager;
+
+        public SearchBarView(IRegionManager regionManager)
         {
             InitializeComponent();
+            _regionManager = regionManager;
+        }
+
+        private void OnUploadClick(object sender, RoutedEventArgs e)
+        {
+            _regionManager.RequestNavigate("FeedRegion", new Uri("UploadView", UriKind.Relative));
         }
     }
 }

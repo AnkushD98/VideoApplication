@@ -11,11 +11,15 @@
         <Label Content="Description" HorizontalAlignment="Left" Margin="42,167,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Margin="165,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" Margin="165,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <ProgressBar HorizontalAlignment="Stretch" Height="21" Margin="8,280,8,8" VerticalAlignment="Top">
-        </ProgressBar>
-        <Label Content="Upload progress" HorizontalAlignment="Center" Margin="0,242,0,0" VerticalAlignment="Top"/>
+        <ProgressBar Height="21" Margin="8,299,8,0" VerticalAlignment="Top"/>
+        <Label Content="Upload progress" HorizontalAlignment="Center" Margin="0,268,0,0" VerticalAlignment="Top"/>
         <Label Content="Uploaded video link" HorizontalAlignment="Left" Margin="420,75,0,0" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="595,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="uploadedVideoLinkTextBlock" HorizontalAlignment="Left" Margin="622,80,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Label Content="Select file to upload" HorizontalAlignment="Left" Margin="420,167,0,0" VerticalAlignment="Top"/>
+        <Button Content="Select" HorizontalAlignment="Left" Margin="622,167,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <TextBox x:Name="selectedFileTextBox" HorizontalAlignment="Left" Margin="165,233,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Selected file" HorizontalAlignment="Left" Margin="42,229,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

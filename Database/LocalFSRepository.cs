@@ -51,5 +51,18 @@ namespace Database
             // Placeholder: Implement video duration extraction logic here, e.g., using FFmpeg or a library
             return "00:00";  // Default value for now
         }
+
+        public Uri SaveVideo(Uri folderUri, Stream videoFileStream, string fileName)
+        {
+            string filePath = Path.Combine(folderUri.LocalPath, fileName);
+
+            // Open a file stream to write the video data to the specified file
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                // Copy the video stream to the file stream asynchronously
+                videoFileStream.CopyTo(fileStream);
+            }
+            return new Uri(filePath);
+        }
     }
 }

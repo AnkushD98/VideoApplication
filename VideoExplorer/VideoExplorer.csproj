@@ -27,4 +27,8 @@
     <Folder Include="Download\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Services\Services.csproj" />
+  </ItemGroup>
+
 </Project>
