@@ -18,7 +18,6 @@ namespace VideoPlayer
         public event EventHandler PlayRequested;
         public event EventHandler PauseRequested;
         public event EventHandler StopRequested;
-        public event EventHandler CloseRequested;
         public event EventHandler<VideoSourceChangedEventArgs> SetSourceRequested;
 
         public VideoPlayerViewModel()

@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VideoExplorer.Upload"
+             xmlns:prism="http://prismlibrary.com/" 
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -17,10 +19,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="595,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <TextBlock x:Name="uploadedVideoLinkTextBlock" HorizontalAlignment="Left" Margin="622,80,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
         <Label Content="Select file to upload" HorizontalAlignment="Left" Margin="420,167,0,0" VerticalAlignment="Top"/>
-        <Button Content="Select" HorizontalAlignment="Left" Margin="622,167,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Command="{Binding UploadCommand}" Content="Select" HorizontalAlignment="Left" Margin="622,167,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="selectedFileTextBox" HorizontalAlignment="Left" Margin="165,233,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Label Content="Selected file" HorizontalAlignment="Left" Margin="42,229,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top" Click="btnBack_Click"/>
+        <Button x:Name="btnBack" Command="{Binding BackCommand}" Content="Back" HorizontalAlignment="Left" Margin="50,10,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>
