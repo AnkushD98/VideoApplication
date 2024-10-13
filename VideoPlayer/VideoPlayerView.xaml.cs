@@ -1,18 +1,16 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Util.CommonModel;
 
 namespace VideoPlayer
 {
     /// <summary>
     /// Interaction logic for VideoPlayerView.xaml
     /// </summary>
-    public partial class VideoPlayerView : UserControl, INavigationAware
+    public partial class VideoPlayerView : UserControl
     {
         private DispatcherTimer _timer;
-        private IRegionNavigationService _regionNavigationService;
-
+        
         public VideoPlayerView()
         {
             InitializeComponent();
@@ -21,26 +19,15 @@ namespace VideoPlayer
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromMilliseconds(500);
             _timer.Tick += (s, e) => sliderPlay.Value = videoMediaElement.Position.TotalSeconds;
-        }
-
-        private void btnPlay_Click(object sender, RoutedEventArgs e)
-        {
-            videoMediaElement.Play();
-        }
-
-        private void btnPause_Click(object sender, RoutedEventArgs e)
-        {
-            videoMediaElement.Pause();
-        }
-
-        private void btnStop_Click(object sender, RoutedEventArgs e)
-        {
-            videoMediaElement.Stop();
-        }
-
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            videoMediaElement.Close();
+            var viewModel = DataContext as VideoPlayerViewModel;
+            if(viewModel == null) return;
+            viewModel.PlayRequested += (s, e) => videoMediaElement.Play();
+            viewModel.PauseRequested += (s, e) => videoMediaElement.Pause();
+            viewModel.StopRequested += (s, e) => videoMediaElement.Stop();
+            viewModel.SetSourceRequested += (s, e) =>
+            {
+                videoMediaElement.Source = e.Source;
+            };
         }
 
         private void sliderPlay_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -53,43 +40,10 @@ namespace VideoPlayer
             videoMediaElement.Volume = (double)sliderVol.Value;
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            Video video = navigationContext.Parameters["Video"] as Video;
-            if(video != null)
-            {
-                videoMediaElement.Source = video.Path;
-            }
-            videoMediaElement.Play();
-            _regionNavigationService = navigationContext.NavigationService;
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
-
         private void OnMediaElementOpened(object sender, RoutedEventArgs e)
         {
             sliderPlay.Maximum = videoMediaElement.NaturalDuration.TimeSpan.TotalSeconds;
             _timer.Start();
-        }
-
-        private bool CanGoBack(object commandArg)
-        {
-            return _regionNavigationService.Journal.CanGoBack;
-        }
-
-        private void GoBack(object sender, RoutedEventArgs e)
-        {
-            if (_regionNavigationService.Journal.CanGoBack)
-            {
-                _regionNavigationService.Journal.GoBack();
-            }
         }
     }
 }

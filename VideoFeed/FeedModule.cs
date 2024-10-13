@@ -16,7 +16,6 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register views and view models
             containerRegistry.RegisterForNavigation<FeedView, FeedViewModel>();
         }
     }

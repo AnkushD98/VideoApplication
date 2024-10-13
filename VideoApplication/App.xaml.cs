@@ -30,7 +30,6 @@ namespace VideoApplication
             moduleCatalog.AddModule<SearchModule>();
             moduleCatalog.AddModule<UploadModule>();
         }
-        
     }
 
 }
