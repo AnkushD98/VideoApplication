@@ -7,7 +7,6 @@ namespace VideoFeed
     /// </summary>
     public partial class FeedView : UserControl
     {
-        
         public FeedView()
         {
             InitializeComponent();

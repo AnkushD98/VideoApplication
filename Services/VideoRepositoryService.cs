@@ -6,10 +6,15 @@ namespace Services
 {
     public class VideoRepositoryService
     {
+        private IVideoRepository _videoRepository;
+        public VideoRepositoryService(IVideoRepository repository)
+        {
+            _videoRepository = repository;
+        }
+
         public List<Video> GetVideosFromSource(Uri uri)
         {
-            LocalFSRepository localFsRepository = new LocalFSRepository();
-            return localFsRepository.GetVideosFromSource(new Uri(Paths.UploadedVideosPath));
+            return _videoRepository.GetVideosFromSource(uri);
         }
     }
 }

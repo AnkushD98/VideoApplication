@@ -1,20 +1,17 @@
 ﻿using System.IO;
+using Util;
 using Util.CommonModel;
 
 namespace Database
 {
-    public class LocalFSRepository
+    public class LocalFSRepository : IVideoRepository
     {
         private static int idCounter = 1;
 
         public List<Video> GetVideosFromSource(Uri folderUri)
         {
             string folderPath = folderUri.LocalPath;
-
-            // Define an array of common video file extensions
             string[] videoExtensions = { ".mp4", ".avi", ".mkv", ".mov", ".flv", ".wmv",".ts" };
-
-            // Get all files from the folder and filter by the video extensions
             var videoFiles = Directory.GetFiles(folderPath)
                                       .Where(file => videoExtensions.Contains(Path.GetExtension(file).ToLower()))
                                       .ToList();
@@ -24,14 +21,12 @@ namespace Database
             foreach (var file in videoFiles)
             {
                 FileInfo fileInfo = new FileInfo(file);
-
-                // Create a Video object with the file details
                 var video = new Video(
                     id: idCounter++,
                     title: Path.GetFileNameWithoutExtension(fileInfo.Name),
-                    description: $"Video file {fileInfo.Name}",  // Description can be customized
+                    description: $"Video file {fileInfo.Name}",
                     path: new Uri(fileInfo.FullName),
-                    length: GetVideoLength(fileInfo.FullName)  // You will need to implement GetVideoLength
+                    length: GetVideoLength(fileInfo.FullName)
                 );
 
                 videos.Add(video);
@@ -40,21 +35,18 @@ namespace Database
             return videos;
         }
 
-        // Method to get the video length (can be implemented using a video library or custom logic)
         public static string GetVideoLength(string filePath)
         {
-            // Placeholder: Implement video duration extraction logic here, e.g., using FFmpeg or a library
-            return "00:00";  // Default value for now
+            //TODO: Implement video duration extraction logic here, e.g., using FFmpeg or a library
+            return "00:00";
         }
 
-        public Uri SaveVideo(Uri folderUri, Stream videoFileStream, string fileName)
+        public Uri SaveVideo(Stream videoFileStream, string folderPath,string fileName)
         {
-            string filePath = Path.Combine(folderUri.LocalPath, fileName);
+            string filePath = Path.Combine(folderPath, fileName);
 
-            // Open a file stream to write the video data to the specified file
             using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
-                // Copy the video stream to the file stream asynchronously
                 videoFileStream.CopyTo(fileStream);
             }
             return new Uri(filePath);

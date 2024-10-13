@@ -11,7 +11,8 @@
              Height="Auto">
     <StackPanel x:Name="pnlStack">
         <DockPanel x:Name="pnlDock" HorizontalAlignment="Stretch" Height="Auto">
-            <Button x:Name="btnBack" Command ="{Binding BackCommand}" Content="Back" HorizontalAlignment="Left" Margin="8,10,0,8" VerticalAlignment="Top" Width="121" Grid.Column="1" DockPanel.Dock="Right"/>
+            <Button x:Name="btnBack" Command ="{Binding BackCommand}" Content="Back" HorizontalAlignment="Left" Margin="8,10,0,8" VerticalAlignment="Top" Width="121" Grid.Column="1"/>
+            <Button x:Name="btnDownload" Command ="{Binding DownloadCommand}" Content="Download" HorizontalAlignment="Center" Margin="-158,10,0,8" VerticalAlignment="Top" Width="121" Grid.Column="1"/>
         </DockPanel>
         <MediaElement x:Name="videoMediaElement" Height="500" Margin="8,8,8,8" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" MediaOpened="OnMediaElementOpened"/>
         <WrapPanel x:Name="pnlWrap" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">

@@ -2,7 +2,7 @@
 {
     public static class Paths
     {
-        public static string UploadedVideosPath = "file:///H:/UploadedVideos";
-        public static string CapturedVideosPath = $"file:///C:/Users/{Environment.UserName}/Videos/Captures";
+        public static string UploadedVideosPath = "H:/UploadedVideos";
+        public static string DownloadedVideosPath = $"C:/Users/{Environment.UserName}/Videos/Captures";
     }
 }

@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System.IO;
+using System.Reflection;
+using System.Windows.Input;
+using Services;
 using Util.CommonModel;
 
 namespace VideoPlayer
@@ -6,6 +9,8 @@ namespace VideoPlayer
     internal class VideoPlayerViewModel : BindableBase, INavigationAware
     {
         private IRegionNavigationService _regionNavigationService;
+        private Uri _videoPath;
+        private DownloadService _downloader;
 
         public ICommand PlayCommand { get; }
 
@@ -15,17 +20,21 @@ namespace VideoPlayer
 
         public ICommand BackCommand { get; }
 
+        public ICommand DownloadCommand { get; }
+
         public event EventHandler PlayRequested;
         public event EventHandler PauseRequested;
         public event EventHandler StopRequested;
         public event EventHandler<VideoSourceChangedEventArgs> SetSourceRequested;
 
-        public VideoPlayerViewModel()
+        public VideoPlayerViewModel(DownloadService downloadService)
         {
             PlayCommand = new DelegateCommand(OnPlay);
             PauseCommand = new DelegateCommand(OnPause);
             StopCommand = new DelegateCommand(OnStop);
             BackCommand = new DelegateCommand(OnBack);
+            DownloadCommand = new DelegateCommand(OnDownload);
+            _downloader = downloadService;
         }
 
         #region INavigationAware
@@ -34,6 +43,7 @@ namespace VideoPlayer
             Video video = navigationContext.Parameters["Video"] as Video;
             if (video != null)
             {
+                _videoPath = video.Path;
                 SetSourceRequested?.Invoke(this, new VideoSourceChangedEventArgs(video.Path));
             }
             if (PlayCommand.CanExecute(null))
@@ -77,6 +87,14 @@ namespace VideoPlayer
         private bool CanGoBack(object commandArg)
         {
             return _regionNavigationService.Journal.CanGoBack;
+        }
+
+        private void OnDownload()
+        {
+            using (FileStream fs = new FileStream(_videoPath.LocalPath, FileMode.Open))
+            {
+                _downloader.DownloadVideo(fs, Path.GetFileName(fs.Name));
+            }
         }
     }
 }

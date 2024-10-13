@@ -10,10 +10,9 @@ namespace VideoFeed
         private Video _selectedVideo;
         private IRegionManager _regionManager;
 
-        public FeedViewModel(IRegionManager regionManager)
+        public FeedViewModel(IRegionManager regionManager, VideoRepositoryService videoRepositoryService)
         {
             _regionManager = regionManager;
-            VideoRepositoryService videoRepositoryService = new VideoRepositoryService();
             Videos = new ObservableCollection<Video>(videoRepositoryService.GetVideosFromSource(new Uri(Paths.UploadedVideosPath)));
         }
 

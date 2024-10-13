@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using Database;
+using Services;
 using VideoExplorer;
 using VideoExplorer.Upload;
 using VideoFeed;
@@ -19,7 +21,10 @@ namespace VideoApplication
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            
+            containerRegistry.RegisterSingleton<UploadService>();
+            containerRegistry.RegisterSingleton<DownloadService>();
+            containerRegistry.RegisterSingleton<VideoRepositoryService>();
+            containerRegistry.RegisterSingleton<IVideoRepository, LocalFSRepository>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

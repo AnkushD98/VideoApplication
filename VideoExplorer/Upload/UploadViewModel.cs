@@ -7,6 +7,7 @@ namespace VideoExplorer.Upload
     internal class UploadViewModel : BindableBase, INavigationAware
     {
         private IRegionNavigationService _regionNavigationService;
+        private UploadService _uploader;
 
         public ICommand UploadCommand { get; }
 
@@ -15,10 +16,11 @@ namespace VideoExplorer.Upload
         public event EventHandler<string> UpdateFileNameRequested;
         public event EventHandler<string> UpdateLinkRequested;
 
-        public UploadViewModel()
+        public UploadViewModel(UploadService uploadService)
         {
             UploadCommand = new DelegateCommand(OnUpload);
             BackCommand = new DelegateCommand(GoBack);
+            _uploader = uploadService;
         }
 
         #region INavigationAware
@@ -40,14 +42,10 @@ namespace VideoExplorer.Upload
         private void OnUpload()
         {
             var fileContent = string.Empty;
-            // Create OpenFileDialog 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-
-            // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".mp4";
             dlg.Filter = "MP4 files (*.mp4)|*.mp4|TS Files (*.ts)|*.ts|MOV Files (*.mov)|*.mov|MKV Files (*.mkv)|*.mkv";
 
-            // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();
 
             // Get the selected file name and display in a TextBox 
@@ -55,14 +53,10 @@ namespace VideoExplorer.Upload
             {
                 string fileName = dlg.FileName;
                 UpdateFileNameRequested?.Invoke(this, fileName);
-                
-                FileInfo fileInfo = new FileInfo(fileName); // Extract file info
-
-                // Send the file stream to the upload service
-                LocalFSUploaderService uploader = new LocalFSUploaderService();
+                FileInfo fileInfo = new FileInfo(fileName);
                 using (FileStream stream = File.OpenRead(fileName))
                 {
-                    UpdateLinkRequested?.Invoke(this, uploader.UploadVideo(stream, fileInfo.Name).ToString());
+                    UpdateLinkRequested?.Invoke(this, _uploader.UploadVideo(stream, fileInfo.Name).ToString());
                 }
             }
         }
