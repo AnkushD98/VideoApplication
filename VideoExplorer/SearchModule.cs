@@ -11,13 +11,11 @@
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            // Register views with regions here (e.g., inject a view into a region)
             _regionManager.RequestNavigate("SearchRegion","SearchBarView");
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register views and view models
             containerRegistry.RegisterForNavigation<SearchBarView,SearchBarViewModel>();
         }
     }

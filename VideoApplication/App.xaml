@@ -4,6 +4,188 @@
              xmlns:local="clr-namespace:VideoApplication"
                         xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
-         
+        <!-- Global Window Background Style (Dark Theme) -->
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <!-- Dark background -->
+        </Style>
+        <!-- Global Button Style (Professional Dark Theme) -->
+        <Style TargetType="Button">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#2C2C2C" Offset="0.0"/>
+                        <GradientStop Color="#1F1F1F" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="BorderBrush" Value="#444444"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5" Color="#000000" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="8">
+                            <!-- Applying CornerRadius here -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Global Label Style (Professional Dark Theme) -->
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <!-- Global TextBox Style (Professional Dark Theme) -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <!-- Deep dark background -->
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <!-- Slightly off-white text for softness -->
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="BorderBrush" Value="#4A4A4A"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="3" Color="#000000" ShadowDepth="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Global Slider Style (Professional Dark Theme) -->
+        <Style TargetType="Slider">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="Background" Value="#2A2A2A"/>
+
+            <!-- Custom Control Template for the Slider -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <!-- Track for the Slider -->
+                            <Track Name="PART_Track" 
+                           VerticalAlignment="Center">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="Slider.DecreaseLarge" 
+                                          Style="{x:Null}" 
+                                          IsTabStop="False" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="Slider.IncreaseLarge" 
+                                          Style="{x:Null}" 
+                                          IsTabStop="False" />
+                                </Track.IncreaseRepeatButton>
+                                <!-- Custom Thumb with Ellipse to achieve rounded look -->
+                                <Track.Thumb>
+                                    <Thumb Width="15" Height="15">
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Ellipse Fill="#1DB954" Stroke="#444444" StrokeThickness="1"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Global ProgressBar Style (Professional Dark Theme) -->
+        <Style TargetType="ProgressBar">
+            <Setter Property="Foreground" Value="#1DB954"/>
+            <!-- Bright green for progress -->
+            <Setter Property="Background" Value="#333333"/>
+            <!-- Dark background -->
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="BorderBrush" Value="#444444"/>
+            <!-- Subtle border -->
+            <Setter Property="BorderThickness" Value="1.5"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <!-- DataGrid Background -->
+            <Setter Property="Background" Value="#2C2C2C"/>
+            <!-- Dark background for the grid -->
+            <Setter Property="Foreground" Value="White"/>
+            <!-- White text -->
+            <Setter Property="GridLinesVisibility" Value="All"/>
+            <!-- Show grid lines -->
+            <Setter Property="HorizontalGridLinesBrush" Value="#444444"/>
+            <!-- Dark gray grid lines -->
+            <Setter Property="VerticalGridLinesBrush" Value="#444444"/>
+            <!-- Dark gray grid lines -->
+
+            <!-- DataGrid Row Background -->
+            <Setter Property="RowBackground" Value="#333333"/>
+            <!-- Dark gray for rows -->
+            <Setter Property="AlternatingRowBackground" Value="#2A2A2A"/>
+            <!-- Slightly different for alternating rows -->
+
+            <!-- DataGrid Header Styling -->
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#1F1F1F"/>
+                        <!-- Dark header background -->
+                        <Setter Property="Foreground" Value="White"/>
+                        <!-- White header text -->
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="BorderBrush" Value="#444444"/>
+                        <!-- Header border -->
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+
+            <!-- DataGrid Cell Style -->
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderBrush" Value="#444444"/>
+                        <!-- Dark cell borders -->
+                        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                        <Setter Property="Padding" Value="8"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+
+            <!-- Row Hover Highlight -->
+            <Setter Property="RowStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#333333"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#555555"/>
+                                <!-- Lighter gray on hover -->
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Application.Resources>
 </prism:PrismApplication>
