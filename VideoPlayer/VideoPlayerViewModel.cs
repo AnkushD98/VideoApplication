@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using System.Windows;
 using System.Windows.Input;
 using Services;
 using Util.Common.Model;
@@ -11,6 +12,8 @@ namespace VideoPlayer
         private IRegionNavigationService _regionNavigationService;
         private Uri _videoPath;
         private DownloadService _downloader;
+        private bool _allowDownload;
+        private DelegateCommand _downloadCommand;
 
         public ICommand PlayCommand { get; }
 
@@ -20,7 +23,21 @@ namespace VideoPlayer
 
         public ICommand BackCommand { get; }
 
-        public ICommand DownloadCommand { get; }
+        public ICommand DownloadCommand => _downloadCommand;
+
+        public bool AllowDownload
+        {
+            get
+            {
+                return _allowDownload;
+            }
+            set
+            {
+                _allowDownload = value;
+                SetProperty(ref _allowDownload, AllowDownload);
+                _downloadCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         public event EventHandler PlayRequested;
         public event EventHandler PauseRequested;
@@ -33,7 +50,7 @@ namespace VideoPlayer
             PauseCommand = new DelegateCommand(OnPause);
             StopCommand = new DelegateCommand(OnStop);
             BackCommand = new DelegateCommand(OnBack);
-            DownloadCommand = new DelegateCommand(OnDownload);
+            _downloadCommand = new DelegateCommand(OnDownload, ()=>AllowDownload);
             _downloader = downloadService;
         }
 
@@ -93,7 +110,8 @@ namespace VideoPlayer
         {
             using (FileStream fs = new FileStream(_videoPath.LocalPath, FileMode.Open))
             {
-                _downloader.DownloadVideo(fs, Path.GetFileName(fs.Name));
+                var downloadedPath = _downloader.DownloadVideo(fs, Path.GetFileName(fs.Name));
+                MessageBox.Show("Video downloaded at:" + downloadedPath, "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

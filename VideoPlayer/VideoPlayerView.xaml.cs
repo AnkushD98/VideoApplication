@@ -23,7 +23,11 @@ namespace VideoPlayer
             if(viewModel == null) return;
             viewModel.PlayRequested += (s, e) => videoMediaElement.Play();
             viewModel.PauseRequested += (s, e) => videoMediaElement.Pause();
-            viewModel.StopRequested += (s, e) => videoMediaElement.Close();
+            viewModel.StopRequested += (s, e) =>
+            {
+                videoMediaElement.Close();
+                viewModel.AllowDownload = true;
+            };
             viewModel.SetSourceRequested += (s, e) =>
             {
                 videoMediaElement.Source = e.Source;
