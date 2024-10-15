@@ -12,10 +12,6 @@ namespace VideoExplorer.Upload
         public UploadView()
         {
             InitializeComponent();
-            var viewModel = DataContext as UploadViewModel;
-            if (viewModel == null) return;
-            viewModel.UpdateFileNameRequested += (s, e) => selectedFileTextBox.Text = e;
-            viewModel.UpdateLinkRequested += (s, e) => uploadedVideoLinkTextBlock.Text = e;
         }
     }
 }

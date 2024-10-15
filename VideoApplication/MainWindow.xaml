@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VideoApplication"
         xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="796" SizeToContent="WidthAndHeight">
+        Title="MainWindow" d:DesignWidth="800" d:DesignHeight="625"  SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

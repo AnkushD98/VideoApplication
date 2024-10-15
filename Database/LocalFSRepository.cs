@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using Util;
-using Util.CommonModel;
+using Util.Common.Model;
 
 namespace Database
 {

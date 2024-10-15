@@ -24,8 +24,9 @@ namespace VideoApplication
             containerRegistry.RegisterSingleton<UploadService>();
             containerRegistry.RegisterSingleton<DownloadService>();
             containerRegistry.RegisterSingleton<VideoRepositoryService>();
-            //containerRegistry.RegisterSingleton<IVideoRepository, LocalFSRepository>();
-            containerRegistry.RegisterSingleton<IVideoRepository, AmazonS3Repository>();
+            containerRegistry.RegisterSingleton<IVideoRepository, LocalFSRepository>();
+            //containerRegistry.RegisterSingleton<IVideoRepository, AmazonS3Repository>();
+            containerRegistry.RegisterSingleton<IEventAggregator,EventAggregator>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:VideoPlayer"
              xmlns:prism="http://prismlibrary.com/" 
              prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d" d:DesignWidth="800"
+             mc:Ignorable="d" d:DesignWidth="1350"
              Width="Auto"
              Height="Auto">
     <StackPanel x:Name="pnlStack">
@@ -14,7 +14,7 @@
             <Button x:Name="btnBack" Command ="{Binding BackCommand}" Content="Back" HorizontalAlignment="Left" Margin="8,10,0,8" VerticalAlignment="Top" Width="121" Grid.Column="1"/>
             <Button x:Name="btnDownload" Command ="{Binding DownloadCommand}" Content="Download" HorizontalAlignment="Center" Margin="-158,10,0,8" VerticalAlignment="Top" Width="121" Grid.Column="1"/>
         </DockPanel>
-        <MediaElement x:Name="videoMediaElement" Height="500" Margin="8,8,8,8" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" MediaOpened="OnMediaElementOpened"/>
+        <MediaElement x:Name="videoMediaElement" Width ="1333" Height="765" Margin="8,8,8,8" HorizontalAlignment="Stretch" Grid.ColumnSpan="2" MediaOpened="OnMediaElementOpened"/>
         <WrapPanel x:Name="pnlWrap" Orientation="Horizontal" HorizontalAlignment="Center" Height="Auto">
             <Button x:Name="btnPlay" Command ="{Binding PlayCommand}" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Height="48" Margin="8,8,8,8"/>
             <Button x:Name="btnPause" Command ="{Binding PauseCommand}" Content="Pause"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="48" Margin="8,8,8,8"/>

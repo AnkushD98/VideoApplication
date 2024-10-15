@@ -1,10 +1,11 @@
 ﻿using System.IO;
 using Amazon.S3.Transfer;
 using Amazon.S3;
-using Util.CommonModel;
 using Amazon;
 using Util;
 using Amazon.S3.Model;
+using Util.Common;
+using Util.Common.Model;
 
 namespace Database
 {

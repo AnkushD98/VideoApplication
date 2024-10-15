@@ -9,6 +9,13 @@
             <Setter Property="Background" Value="#1C1C1C"/>
             <!-- Dark background -->
         </Style>
+        
+        <!-- Custom stuff from me -->
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="#1C1C1C"/>
+            <!-- Dark background -->
+        </Style>
+        
         <!-- Global Button Style (Professional Dark Theme) -->
         <Style TargetType="Button">
             <Setter Property="Background">
@@ -21,7 +28,7 @@
             </Setter>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="Margin" Value="8"/>
             <Setter Property="BorderBrush" Value="#444444"/>
             <Setter Property="BorderThickness" Value="1"/>
@@ -47,9 +54,15 @@
 
         <!-- Global Label Style (Professional Dark Theme) -->
         <Style TargetType="Label">
-            <Setter Property="Foreground" Value="LightGray"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <!-- Light gray text -->
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Padding" Value="3"/>
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
 
         <!-- Global TextBox Style (Professional Dark Theme) -->
@@ -59,7 +72,7 @@
             <Setter Property="Foreground" Value="#E0E0E0"/>
             <!-- Slightly off-white text for softness -->
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Padding" Value="3"/>
             <Setter Property="Margin" Value="8"/>
             <Setter Property="BorderBrush" Value="#4A4A4A"/>
             <Setter Property="BorderThickness" Value="1.5"/>
@@ -74,41 +87,12 @@
         <Style TargetType="Slider">
             <Setter Property="Margin" Value="10"/>
             <Setter Property="Width" Value="180"/>
+            <Setter Property="Foreground" Value="LightGray"/>
+            <!-- Green for slider thumb -->
             <Setter Property="Background" Value="#2A2A2A"/>
-
-            <!-- Custom Control Template for the Slider -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Slider">
-                        <Grid>
-                            <!-- Track for the Slider -->
-                            <Track Name="PART_Track" 
-                           VerticalAlignment="Center">
-                                <Track.DecreaseRepeatButton>
-                                    <RepeatButton Command="Slider.DecreaseLarge" 
-                                          Style="{x:Null}" 
-                                          IsTabStop="False" />
-                                </Track.DecreaseRepeatButton>
-                                <Track.IncreaseRepeatButton>
-                                    <RepeatButton Command="Slider.IncreaseLarge" 
-                                          Style="{x:Null}" 
-                                          IsTabStop="False" />
-                                </Track.IncreaseRepeatButton>
-                                <!-- Custom Thumb with Ellipse to achieve rounded look -->
-                                <Track.Thumb>
-                                    <Thumb Width="15" Height="15">
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Ellipse Fill="#1DB954" Stroke="#444444" StrokeThickness="1"/>
-                                            </ControlTemplate>
-                                        </Thumb.Template>
-                                    </Thumb>
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="TickPlacement" Value="BottomRight"/>
+            <Setter Property="Ticks" Value ="0,10,20,30,40,50,60,70,80,90,100"/>
+            <!-- Dark background for track -->
         </Style>
 
         <!-- Global ProgressBar Style (Professional Dark Theme) -->
@@ -165,7 +149,7 @@
                         <Setter Property="BorderBrush" Value="#444444"/>
                         <!-- Dark cell borders -->
                         <Setter Property="BorderThickness" Value="0,0,0,1"/>
-                        <Setter Property="Padding" Value="8"/>
+                        <Setter Property="Padding" Value="3"/>
                     </Style>
                 </Setter.Value>
             </Setter>

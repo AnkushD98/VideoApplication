@@ -1,6 +1,6 @@
 ﻿using Database;
 using Util;
-using Util.CommonModel;
+using Util.Common.Model;
 
 namespace Services
 {

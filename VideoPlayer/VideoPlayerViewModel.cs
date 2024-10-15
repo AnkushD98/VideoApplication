@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Input;
 using Services;
-using Util.CommonModel;
+using Util.Common.Model;
 
 namespace VideoPlayer
 {

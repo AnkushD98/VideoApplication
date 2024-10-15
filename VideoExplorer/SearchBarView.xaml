@@ -4,19 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VideoExplorer"
-             mc:Ignorable="d" d:DesignWidth="800" Height="Auto">
+             mc:Ignorable="d" Height="51" Width="647">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.2*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="0.1*"/>
             <ColumnDefinition Width="0.2*"/>
+            <ColumnDefinition Width="0.1*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="lblPageName" Content="Home" Grid.Column="0" Width="100" Background="{x:Null}" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="Auto"/>
-        <TextBox x:Name="txtSearch" Text="Search..." Grid.Column="1" VerticalContentAlignment="Center" FontSize="12" />
-        <Button Grid.Column="2" Width="50">
+        <Label x:Name="lblPageName" Content="Home" Grid.Column="0" Width="70" Background="{x:Null}" FontSize="12" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="Auto"/>
+        <TextBox x:Name="txtSearch" Text="{Binding SearchText}" Grid.Column="1" VerticalContentAlignment="Center" FontSize="12" />
+        <Button Grid.Column="2" Width="38" Command="{Binding SearchCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="0,8,0,8">
             <Image Source="Resource/SearchIcon.png" />
         </Button>
-        <Button Grid.Column="3" Content="Upload" Click="OnUploadClick"/>
+        <Button Grid.Column="4" Width="35" Command="{Binding RefreshCommand}" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="3,8,0,8">
+            <Image Source="Resource/Refresh.png" Stretch="Uniform"/>
+        </Button>
+        <Button Grid.Column="3" Content="Upload" Command="{Binding UploadCommand}"/>
     </Grid>
 </UserControl>

@@ -1,4 +1,4 @@
-﻿namespace Util
+﻿namespace Util.Common
 {
     public static class Paths
     {

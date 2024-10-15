@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Util.CommonModel;
+using Util.Common.Model;
 
 namespace Database
 {

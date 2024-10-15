@@ -1,4 +1,4 @@
-﻿namespace Util.CommonModel
+﻿namespace Util.Common.Model
 {
     public class Video
     {
