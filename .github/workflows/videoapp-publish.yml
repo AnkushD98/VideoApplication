@@ -26,11 +26,11 @@ jobs:
 
       # Build the solution
       - name: Build the solution
-        run: dotnet build VideoApplication.sln --configuration Release --no-restore /p:RunCodeAnalysis=false
+        run: dotnet build VideoApplication.sln -c Release --no-restore /p:RunCodeAnalysis=false
 
       # Publish the application (create a publish directory)
       - name: Publish the application
-        run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --output ./publish
+        run: dotnet publish VideoApplication/VideoApplication.csproj -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
 
       # Archive the published application
       - name: Create ZIP archive
