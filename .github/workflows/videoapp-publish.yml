@@ -26,11 +26,11 @@ jobs:
 
       # Build the solution
       - name: Build the solution
-        run: dotnet build VideoApplication.sln -c Release --no-restore /p:RunCodeAnalysis=false
+        run: dotnet build VideoApplication.sln --configuration Release --no-restore /p:RunCodeAnalysis=false
 
       # Publish the application (create a publish directory)
       - name: Publish the application
-        run: dotnet publish VideoApplication/VideoApplication.csproj -c Release -p:PublishSingleFile=true --no-build --output ./publish
+        run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --output ./publish
 
       # Archive the published application
       - name: Create ZIP archive
@@ -57,7 +57,7 @@ jobs:
 
       # Create a GitHub release
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v1
         with:
           files: ./publish/**
         env:
