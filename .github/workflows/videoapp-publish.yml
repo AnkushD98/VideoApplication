@@ -30,7 +30,7 @@ jobs:
 
       # Publish the application (create a publish directory)
       - name: Publish the application
-        run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --output ./publish
+        run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --output ./VideoApp-publish
 
       # Archive the published application
       - name: Create ZIP archive
