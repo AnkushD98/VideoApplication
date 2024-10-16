@@ -53,7 +53,7 @@ jobs:
 
       # Upload release artifact
       - name: Upload release artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: VideoApp-publish
           path: ./publish/
