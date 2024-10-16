@@ -29,7 +29,7 @@ jobs:
 
       # Build the solution
       - name: Build the solution
-        run: dotnet build VideoApplication.sln --configuration Release --no-restore /p:NoWarn="CS8618,CS8601,CS8600"
+        run: dotnet build VideoApplication.sln --configuration Release --no-restore /p:NoWarn="8618,8601,8600"
 
       # Publish the application (create a publish directory)
       - name: Publish the application
