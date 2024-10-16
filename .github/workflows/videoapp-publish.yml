@@ -22,7 +22,7 @@ jobs:
 
       # Install dependencies (restore NuGet packages)
       - name: Restore dependencies
-        run: dotnet restore VideoApplication.csproj
+        run: dotnet restore VideoApplication/VideoApplication.csproj
 
       # Build the solution
       - name: Build the solution
