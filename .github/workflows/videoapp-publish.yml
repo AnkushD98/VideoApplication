@@ -32,12 +32,17 @@ jobs:
       - name: Publish the application
         run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --self-contained -r win-x64 -p:PublishSingleFile=true --output ./VideoApp-publish
 
-      # Archive the published application
+      # Create a ZIP archive using PowerShell
       - name: Create ZIP archive
+        run: |
+          Compress-Archive -Path ./VideoApp-publish/* -DestinationPath VideoApp-publish.zip
+
+      # Upload the published application
+      - name: Upload the published application
         uses: actions/upload-artifact@v4
         with:
           name: VideoApp-publish
-          path: ./VideoApp-publish/
+          path: ./VideoApp/
 
   release:
     needs: build
@@ -53,18 +58,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: VideoApp-publish
-          path: ./VideoApp-publish/
+          path: ./VideoApp/
         
       # List the contents of the root directory (for debugging)
       - name: List root directory
         run: ls -R
-
-      # Unzip the downloaded artifact (if necessary)
-      - name: Unzip artifact (if needed)
-        run: |
-          if (Test-Path "./VideoApp-publish.zip") {
-            Expand-Archive -Path "./VideoApp-publish.zip" -DestinationPath "./VideoApp-publish"
-          }
 
       # List the contents of the publish directory (after unzipping if necessary)
       - name: List publish directory after unzipping
@@ -74,6 +72,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./VideoApp-publish/**
+          files: ./VideoApp/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
