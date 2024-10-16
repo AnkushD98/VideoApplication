@@ -15,13 +15,13 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Set up .NET
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x' # Matches the project's target framework
+          dotnet-version: '8.x'
 
       # Install dependencies (restore NuGet packages)
       - name: Restore dependencies
@@ -29,7 +29,7 @@ jobs:
 
       # Build the solution
       - name: Build the solution
-        run: dotnet build VideoApplication.sln --configuration Release --no-restore
+        run: dotnet build VideoApplication.sln --configuration Release --no-restore /p:NoWarn=CS8618;CS8601;CS8600;CS8603
 
       # Publish the application (create a publish directory)
       - name: Publish the application
@@ -37,7 +37,7 @@ jobs:
 
       # Archive the published application
       - name: Create ZIP archive
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: VideoApp-publish
           path: ./publish/
@@ -49,7 +49,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Upload release artifact
       - name: Upload release artifact
