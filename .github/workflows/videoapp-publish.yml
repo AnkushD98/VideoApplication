@@ -54,7 +54,19 @@ jobs:
         with:
           name: VideoApp-publish
         
-      - name: List downloaded artifact contents
+      # List the contents of the root directory (for debugging)
+      - name: List root directory
+        run: ls -R
+
+      # Unzip the downloaded artifact (if necessary)
+      - name: Unzip artifact (if needed)
+        run: |
+          if (Test-Path "./VideoApp-publish.zip") {
+            Expand-Archive -Path "./VideoApp-publish.zip" -DestinationPath "./VideoApp-publish"
+          }
+
+      # List the contents of the publish directory (after unzipping if necessary)
+      - name: List publish directory after unzipping
         run: ls -R ./VideoApp-publish
 
       # Create a GitHub release
