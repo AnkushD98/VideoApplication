@@ -75,6 +75,7 @@ namespace VideoPlayer
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+            AllowDownload = false;
         }
         #endregion
 
