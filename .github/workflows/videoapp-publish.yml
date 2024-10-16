@@ -48,17 +48,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Upload release artifact
-      - name: Upload release artifact
-        uses: actions/upload-artifact@v4
+      # Download publish artifact
+      - name: Download publish artifact
+        uses: actions/download-artifact@v4
         with:
           name: VideoApp-publish
-          path: ./publish/
 
       # Create a GitHub release
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          files: ./publish/**
+          files: ./VideoApp-publish/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
