@@ -1,0 +1,67 @@
+name: Build and Publish WPF Application
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.x' # Matches the project's target framework
+
+      # Install dependencies (restore NuGet packages)
+      - name: Restore dependencies
+        run: dotnet restore VideoApplication.sln
+
+      # Build the solution
+      - name: Build the solution
+        run: dotnet build VideoApplication.sln --configuration Release --no-restore
+
+      # Publish the application (create a publish directory)
+      - name: Publish the application
+        run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --output ./publish
+
+      # Archive the published application
+      - name: Create ZIP archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: VideoApp-publish
+          path: ./publish/
+
+  release:
+    needs: build
+    runs-on: windows-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Upload release artifact
+      - name: Upload release artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: VideoApp-publish
+          path: ./publish/
+
+      # Create a GitHub release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./publish/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
