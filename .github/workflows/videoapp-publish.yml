@@ -22,15 +22,15 @@ jobs:
 
       # Install dependencies (restore NuGet packages)
       - name: Restore dependencies
-        run: dotnet restore VideoApplication.sln
+        run: dotnet restore VideoApplication.csproj
 
       # Build the solution
       - name: Build the solution
-        run: dotnet build VideoApplication/VideoApplication.csproj --configuration Release --no-restore --self-contained -r win-x64 -p:PublishSingleFile=true /p:RunCodeAnalysis=false
+        run: dotnet build VideoApplication/VideoApplication.csproj --configuration Release --no-restore /p:RunCodeAnalysis=false
 
       # Publish the application (create a publish directory)
       - name: Publish the application
-        run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --output ./VideoApp-publish
+        run: dotnet publish VideoApplication/VideoApplication.csproj --configuration Release --self-contained -r win-x64 -p:PublishSingleFile=true --output ./VideoApp-publish
 
       # Archive the published application
       - name: Create ZIP archive
