@@ -2,11 +2,8 @@ name: Build and Publish WPF Application
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -45,7 +42,7 @@ jobs:
   release:
     needs: build
     runs-on: windows-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
 
     steps:
       - name: Checkout code
@@ -60,7 +57,7 @@ jobs:
 
       # Create a GitHub release
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: ./publish/**
         env:
