@@ -19,15 +19,16 @@ namespace Database
         public List<Video> GetVideosFromSource(Uri folderUri)
         {
             // Specify the local file path to save the downloaded video
-            string localFilePath = folderUri.LocalPath;
+            string localFolderPath = folderUri.LocalPath;
+            string s3FolderPath = "s3://videoapplication-demo-ankush/Videos/";
 
             // Download the video
-            DownloadFile(localFilePath);
+            DownloadFile(localFolderPath,s3FolderPath);
 
 
             //Repeat local FS stuff
             string[] videoExtensions = { ".mp4", ".avi", ".mkv", ".mov", ".flv", ".wmv", ".ts" };
-            var videoFiles = Directory.GetFiles(localFilePath)
+            var videoFiles = Directory.GetFiles(localFolderPath)
                                       .Where(file => videoExtensions.Contains(Path.GetExtension(file).ToLower()))
                                       .ToList();
 
@@ -105,30 +106,50 @@ namespace Database
         /// Downloads a video file from S3 and saves it locally.
         /// </summary>
         /// <param name="filePath">The local file path to save the downloaded video.</param>
-        private static void DownloadFile(string filePath)
+        private static void DownloadFile(string localFolderPath,string s3FolderPath)
         {
             try
             {
-                var request = new GetObjectRequest
+                var listRequest = new ListObjectsV2Request
                 {
                     BucketName = bucketName,
-                    Key = "Paranorma1080p.mp4",
+                    //Prefix = s3FolderPath // Folder path in S3
                 };
 
-                // Get the object from S3
-                using (GetObjectResponse response = s3Client.GetObjectAsync(request).GetAwaiter().GetResult())
+                // List all objects in the folder (synchronous)
+                var listResponse = s3Client.ListObjectsV2Async(listRequest).GetAwaiter().GetResult();
+
+                foreach (var s3Object in listResponse.S3Objects)
                 {
-                    // Create a FileStream to write the data to a file
-                    using (var fileStream = new FileStream(filePath+"/"+request.Key, FileMode.Create, FileAccess.Write))
+                    string fileName = Path.GetFileName(s3Object.Key);  // Extract the file name from the S3 key
+                    string localFilePath = Path.Combine(localFolderPath, fileName);  // Combine local folder and file name
+
+                    // Skip if it's a folder or empty file
+                    if (string.IsNullOrEmpty(fileName)) continue;
+
+                    var getRequest = new GetObjectRequest
                     {
-                        // Copy the response stream directly to the file
-                        response.ResponseStream.CopyTo(fileStream);
+                        BucketName = bucketName,
+                        Key = s3Object.Key
+                    };
+
+                    // Get the object from S3 and download it to the local file system (synchronous)
+                    using (GetObjectResponse response = s3Client.GetObjectAsync(getRequest).GetAwaiter().GetResult())
+                    {
+                        // Create a FileStream to write the data to a file
+                        using (var fileStream = new FileStream(localFilePath, FileMode.Create, FileAccess.Write))
+                        {
+                            // Copy the response stream directly to the file
+                            response.ResponseStream.CopyTo(fileStream);
+                        }
                     }
+
+                    Console.WriteLine($"Downloaded: {localFilePath}");
                 }
             }
             catch (AmazonS3Exception e)
             {
-                Console.WriteLine($"Error encountered: {e.Message}");
+                Console.WriteLine($"S3 error encountered: {e.Message}");
             }
             catch (Exception e)
             {
@@ -137,3 +158,4 @@ namespace Database
         }
     }
 }
+
