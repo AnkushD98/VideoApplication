@@ -26,7 +26,7 @@ jobs:
 
       # Build the solution
       - name: Build the solution
-        run: dotnet build VideoApplication.csproj --configuration Release --no-restore --self-contained -r win-x64 -p:PublishSingleFile=true /p:RunCodeAnalysis=false
+        run: dotnet build VideoApplication/VideoApplication.csproj --configuration Release --no-restore --self-contained -r win-x64 -p:PublishSingleFile=true /p:RunCodeAnalysis=false
 
       # Publish the application (create a publish directory)
       - name: Publish the application
