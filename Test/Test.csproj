@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Services\Services.csproj" />
     <ProjectReference Include="..\VideoExplorer\VideoExplorer.csproj" />
+    <ProjectReference Include="..\VideoPlayer\VideoPlayer.csproj" />
   </ItemGroup>
 
 </Project>
