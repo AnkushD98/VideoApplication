@@ -53,7 +53,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: VideoApp-publish
-          path: .
+          path: ./VideoApp-publish/
         
       # List the contents of the root directory (for debugging)
       - name: List root directory
@@ -74,6 +74,6 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./**
+          files: ./VideoApp-publish/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
